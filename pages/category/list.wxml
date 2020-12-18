@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="list-header">
+    <scroll-view bindscrolltolower="bindDownLoad" class="weui-panel weui-panel_access" scroll-y="true" style="height: {{scrollHeight}}px; width: 750rpx;" wx:if="{{list.data.length > 0}}">
+
+      <view class="new">
+        <view class="category-list {{arrange}}">
+          <navigator class="list b-f" hover-class="none" url="../goods/index?id={{item._id}}" wx:for="{{list.data}}" wx:key="list">
+            <view class="left">
+              <view class="img">
+                <image class="goodsImg" mode="scaleToFill" src="{{item.image[0]}}"></image>
+              </view>
+            </view>
+            <view class="right">
+              <view class="cont">
+                <text class="f-28 title twolist-hidden m-top10">{{ item.name }}</text>
+                <view class="price f-30 col-m">
+                  ￥{{ item.price }}
+                </view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+      <view hidden="{{!no_more}}" class="no-more f-30">亲, 没有更多了</view>
+    </scroll-view>
+  </view>
+
+  <view wx:if="{{!noList && !list.data.length}}" class="yoshop-notcont" style="margin-top:130px;">
+    <view class="img">
+      <image mode="aspectFit" src="../../images/no_content.png"></image>
+    </view>
+    <text class="cont">亲, 没有相关内容</text>
+  </view>
+
+</view>
