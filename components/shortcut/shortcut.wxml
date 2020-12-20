@@ -14,13 +14,6 @@
     </button>
   </form>
 
-  <!-- 购物车 -->
-  <form bindsubmit="_onTargetPage">
-    <button formType="submit" data-index="2" class="nav-item btn-normal {{ isShow ? 'show_40' : (transparent ? '' : 'hide_40') }}">
-      <text class="iconfont icon-cart"></text>
-    </button>
-  </form>
-
   <!-- 个人中心 -->
   <form bindsubmit="_onTargetPage">
     <button formType="submit" data-index="3" class="nav-item btn-normal {{ isShow ? 'show_20' : (transparent ? '' : 'hide_20') }}">

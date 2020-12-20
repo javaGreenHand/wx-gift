@@ -17,8 +17,8 @@
       <view class="title-header b-f t-c f-32 col-3">场景礼品定制 SCENE GIFT COLLECTION</view>
     </view>
     <navigator url="../category/list">
-    	<view>
-        <image style="width: 100%" mode='widthFix' src="{{navi.imgUrl}}"></image>
+    	<view wx:for="{{navi}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
+        <image style="width: 100%" mode='widthFix' src="{{item.imgUrl}}"></image>
 		  </view>
     </navigator>
 	

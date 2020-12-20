@@ -4,9 +4,7 @@
  */
 const tabBarLinks = [
   'pages/index/index',
-  'pages/category/index',
-  'pages/flow/index',
-  'pages/user/index'
+  'pages/category/list'
 ];
 
 // 站点信息

@@ -48,9 +48,9 @@ Page({
     db.collection('good').doc(_this.data.id).get().then(result => {
       // 初始化商品详情数据
       // 待研究
-      // let data = _this.initGoodsDetailData(result.data);
+      let data = _this.initGoodsDetailData(result.data);
       _this.setData({
-        detail : result.data
+        detail : data
       });
     })
   },
@@ -62,7 +62,7 @@ Page({
     let _this = this;
     // 富文本转码
     if (data.content.length > 0) {
-      wxParse.wxParse('content', 'html', data.content, _this, 0);
+      wxParse.wxParse('content', 'html', data.content, _this, 20);
     }
     // 商品价格/划线价/库存
     // data.goods_sku_id = data.detail.spec[0].spec_sku_id;
@@ -192,45 +192,6 @@ Page({
     if (this.data.goods_num > 1) {
       this.setData({
         goods_num: --this.data.goods_num
-      });
-    }
-  },
-
-  /**
-   * 跳转购物车页面
-   */
-  flowCart: function () {
-    wx.switchTab({
-      url: "../flow/index"
-    });
-  },
-
-  /**
-   * 加入购物车and立即购买，云开发
-   */
-  submit(e) {
-    let _this = this,
-      submitType = e.currentTarget.dataset.type;
-
-    if (submitType === 'buyNow') {
-      // 立即购买
-      wx.navigateTo({
-        url: '../flow/checkout?' + App.urlEncode({
-          order_type: 'buyNow',
-          goods_id: _this.data.goods_id,
-          goods_num: _this.data.goods_num,
-          goods_sku_id: _this.data.goods_sku_id,
-        })
-      });
-    } else if (submitType === 'addCart') {
-      // 加入购物车
-      App._post_form('cart/add', {
-        goods_id: _this.data.goods_id,
-        goods_num: _this.data.goods_num,
-        goods_sku_id: _this.data.goods_sku_id,
-      }, function(result) {
-        App.showSuccess(result.msg);
-        _this.setData(result.data);
       });
     }
   },

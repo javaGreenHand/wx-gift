@@ -14,17 +14,7 @@ Page({
     items: [{
       type : "banner",
       data : [{
-        linkUrl : "www.baidu.com",
-        imgUrl : "https://7465-test-s4i9y-1304539946.tcb.qcloud.la/u%3D2350451953%2C1009677349%26fm%3D26%26gp%3D0.jpg?sign=94dfd6c42ea834ac2237eb6123b5d6fc&t=1608194219"
-      },{
-        linkUrl : "www.baidu.com",
-        imgUrl : "https://7465-test-s4i9y-1304539946.tcb.qcloud.la/u%3D2350451953%2C1009677349%26fm%3D26%26gp%3D0.jpg?sign=94dfd6c42ea834ac2237eb6123b5d6fc&t=1608194219"
-      },{
-        linkUrl : "www.baidu.com",
-        imgUrl : "https://7465-test-s4i9y-1304539946.tcb.qcloud.la/u%3D2350451953%2C1009677349%26fm%3D26%26gp%3D0.jpg?sign=94dfd6c42ea834ac2237eb6123b5d6fc&t=1608194219"
-      },{
-        linkUrl : "www.baidu.com",
-        imgUrl : "https://7465-test-s4i9y-1304539946.tcb.qcloud.la/u%3D2350451953%2C1009677349%26fm%3D26%26gp%3D0.jpg?sign=94dfd6c42ea834ac2237eb6123b5d6fc&t=1608194219"
+        imgUrl : "http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbX*2Vb1.fAFQEJnwzIoADBEggxQ3FKAlDUCKpLauj.JNP.tL04O.4y8D7TZKE2xVOKWdaaPLJK5nyIwNl8l.RI!/b"
       }],
       style : {
         btnShape : "",
@@ -33,7 +23,13 @@ Page({
     }],
     newest: {},
     best: [],
-    navi : {imgUrl : 'https://7465-test-s4i9y-1304539946.tcb.qcloud.la/gift.png?sign=7792271aa55d6c248ddfaef42a3714d8&t=1608267830'},
+    navi : [{
+      imgUrl : 'http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbtQM1AervTn*nsLy5iTXuZwmcPA59B42G*PoYnVPN2e82O6iz2Pl5.91Tgc0AA37ZXf1Km657BFbXg48dEFRgo!/b'
+    },{
+      imgUrl : 'http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbtQM1AervTn*nsLy5iTXubo17img.F4*HSmRLAuQqy3CFor9zQ3GgiZKZLxjgCroKSnZS.brhdZ22qHFLqj1*o!/b'
+    }],
+    
+    
     scrollTop: 0,
   },
 
