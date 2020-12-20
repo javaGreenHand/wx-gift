@@ -1,9 +1,8 @@
-let App = getApp(),
-  wxParse = require("../../wxParse/wxParse.js");
+let App = getApp()
 
-  const db = wx.cloud.database({
-    env: 'test-s4i9y'
-  })
+const db = wx.cloud.database({
+  env: 'test-s4i9y'
+})
 
 Page({
 
@@ -50,7 +49,7 @@ Page({
       // 待研究
       let data = _this.initGoodsDetailData(result.data);
       _this.setData({
-        detail : data
+        detail: data
       });
     })
   },
@@ -62,7 +61,7 @@ Page({
     let _this = this;
     // 富文本转码
     if (data.content.length > 0) {
-      wxParse.wxParse('content', 'html', data.content, _this, 20);
+      data.content = App.towxml(data.content, 'html');
     }
     // 商品价格/划线价/库存
     // data.goods_sku_id = data.detail.spec[0].spec_sku_id;
@@ -199,7 +198,7 @@ Page({
   /**
    * 分享当前页面
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     // 构建页面参数
     let _this = this;
     return {

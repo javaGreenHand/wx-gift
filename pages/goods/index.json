@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "商品详情",
   "usingComponents": {
-    "shortcut": "/components/shortcut/shortcut"
+    "shortcut": "/components/shortcut/shortcut",
+    "towxml":"/towxml/towxml"
   }
 }

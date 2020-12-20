@@ -34,7 +34,7 @@
         <view wx:if="{{detail.content!=''}}">
           <view class="b-f goods-detail-box">
             <view class="goods-cont-li">
-              <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+              <towxml nodes="{{detail.content}}"/>
             </view>
           </view>
         </view>

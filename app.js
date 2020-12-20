@@ -19,6 +19,8 @@ App({
     user_id: null,
   },
 
+  towxml:require('/towxml/index'),
+
   api_root: '', // api地址
 
   /**
