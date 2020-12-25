@@ -1,7 +1,7 @@
 let App = getApp()
 
 const db = wx.cloud.database({
-  env: 'test-s4i9y'
+  env: 'prod-6gyilzj48c550b50'
 })
 
 Page({
@@ -44,7 +44,7 @@ Page({
   getGoodsDetail() {
     let _this = this;
 
-    db.collection('good').doc(_this.data.id).get().then(result => {
+    db.collection('goods').doc(_this.data.id).get().then(result => {
       // 初始化商品详情数据
       // 待研究
       let data = _this.initGoodsDetailData(result.data);

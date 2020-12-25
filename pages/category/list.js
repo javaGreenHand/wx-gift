@@ -1,6 +1,6 @@
 let App = getApp();
 const db = wx.cloud.database({
-  env: 'test-s4i9y'
+  env: 'prod-6gyilzj48c550b50'
 })
 Page({
   data: {
@@ -52,8 +52,8 @@ Page({
       page = 0;
     }
 
-    db.collection('good').count().then(res => {
-      db.collection('good').skip(page * limit).limit(limit).get().then(result => {
+    db.collection('goods').count().then(res => {
+      db.collection('goods').skip(page * limit).limit(limit).get().then(result => {
         let resultList = result,
           dataList = _this.data.list;
           resultList.last_page = res.total / limit;
