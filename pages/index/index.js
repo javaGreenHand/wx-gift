@@ -1,9 +1,12 @@
 let App = getApp();
+const db = wx.cloud.database({
+  env: 'prod-6gyilzj48c550b50'
+})
 
 Page({
   data: {
     // banner轮播组件属性
-    indicatorDots: true, // 是否显示面板指示点	
+    indicatorDots: true, // 是否显示面板指示点
     autoplay: true, // 是否自动切换
     interval: 3000, // 自动切换时间间隔
     duration: 800, // 滑动动画时长
@@ -11,25 +14,18 @@ Page({
     imgCurrent: {}, // 当前banne所在滑块指针
 
     // 页面元素
-    items: [{
-      type : "banner",
-      data : [{
-        imgUrl : "http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbX*2Vb1.fAFQEJnwzIoADBEggxQ3FKAlDUCKpLauj.JNP.tL04O.4y8D7TZKE2xVOKWdaaPLJK5nyIwNl8l.RI!/b"
-      }],
+    item: {
+      data: [],
       style : {
         btnShape : "",
         btnColor : ""
       }
-    }],
+    },
     newest: {},
     best: [],
-    navi : [{
-      imgUrl : 'http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbtQM1AervTn*nsLy5iTXuZwmcPA59B42G*PoYnVPN2e82O6iz2Pl5.91Tgc0AA37ZXf1Km657BFbXg48dEFRgo!/b'
-    },{
-      imgUrl : 'http://m.qpic.cn/psc?/V53yxNr73N5uC32pTtNX2UbHhE2SmNah/45NBuzDIW489QBoVep5mcbtQM1AervTn*nsLy5iTXubo17img.F4*HSmRLAuQqy3CFor9zQ3GgiZKZLxjgCroKSnZS.brhdZ22qHFLqj1*o!/b'
-    }],
-    
-    
+    navi : [],
+
+
     scrollTop: 0,
   },
 
@@ -39,7 +35,7 @@ Page({
     // 设置navbar标题、颜色
     // App.setNavigationBar();
     // 获取首页数据，云开发
-    // this.getIndexData();
+    this.getIndexData();
   },
 
   /**
@@ -47,9 +43,20 @@ Page({
    */
   getIndexData: function() {
     let _this = this;
-    App._get('index/page', {}, function(result) {
-      _this.setData(result.data);
-    });
+    db.collection('banner').get().then(res => {
+      for (var index in res.data){
+        var banner = res.data[index];
+        if(banner.type == 1){
+          _this.setData({
+            'item.data': banner.image
+          });
+        }else if(banner.type == 2){
+          _this.setData({
+            'navi': banner.image
+          });
+        }
+      }
+    })
   },
 
   /**
@@ -70,7 +77,7 @@ Page({
     // 第一种方式
     let imgCurrent = this.data.imgCurrent;
     if (typeof imgCurrent[itemKey] === 'undefined') {
-      imgCurrent[itemKey] = Object.keys(this.data.items[itemKey].data)[0];
+      imgCurrent[itemKey] = Object.keys(this.data.item.data)[0];
     }
     this.setData({
       imgHeights,

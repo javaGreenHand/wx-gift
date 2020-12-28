@@ -1,4 +1,7 @@
-const App = getApp();
+let App = getApp();
+const db = wx.cloud.database({
+  env: 'prod-6gyilzj48c550b50'
+})
 
 Page({
 
@@ -9,13 +12,24 @@ Page({
     isLogin: false,
     userInfo: {},
     orderCount: {},
+    image: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    let _this = this;
+    db.collection('banner').get().then(res => {
+      for (var index in res.data){
+        var banner = res.data[index];
+        if(banner.type == 3){
+          _this.setData({
+            'image': banner.image[0]
+          });
+        }
+      }
+    })
   },
 
   /**

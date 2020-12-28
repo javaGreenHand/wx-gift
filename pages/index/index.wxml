@@ -1,24 +1,14 @@
 <view class="container">
 
 	<scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
-		<block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
-			<!-- 搜索框 
-      <block wx:if="{{item.type === 'search'}}">
-        <include src="components/search/search.wxml" />
-      </block>
-      -->
-			<!-- banner轮播 -->
-			<block wx:if="{{item.type === 'banner'}}">
-				<include src="components/banner/banner.wxml" />
-			</block>
-		</block>
+		<include src="components/banner/banner.wxml" />
 
     <view class="recommended-index-list m-top20">
       <view class="title-header b-f t-c f-32 col-3">场景礼品定制 SCENE GIFT COLLECTION</view>
     </view>
     <navigator url="../category/list">
     	<view wx:for="{{navi}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
-        <image style="width: 100%" mode='widthFix' src="{{item.imgUrl}}"></image>
+        <image style="width: 100%" mode='widthFix' src="{{item}}"></image>
 		  </view>
     </navigator>
 	
