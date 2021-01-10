@@ -1,69 +1,40 @@
 <view class="container">
 
-	<scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
+	<scroll-view bindscroll="bindDownLoad" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
 		<include src="components/banner/banner.wxml" />
 
-    <view class="recommended-index-list m-top20">
+    <!-- <view class="recommended-index-list m-top20">
       <view class="title-header b-f t-c f-32 col-3">场景礼品定制 SCENE GIFT COLLECTION</view>
-    </view>
-    <navigator url="../category/list">
+    </view> -->
+    <!-- <navigator url="../category/list">
     	<view wx:for="{{navi}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
         <image style="width: 100%" mode='widthFix' src="{{item}}"></image>
 		  </view>
-    </navigator>
-	
-
-
-		<!-- 商品推荐 
-    <view class="recommended-index-list m-top20">
-      <view class="title-header b-f t-c f-32 col-3">新品推荐</view>
-    </view>
-    <view class="index_sale ">
-      <scroll-view scroll-x="true">
-        <navigator hover-class="none" style="display: inline-block;" url="../goods/index?goods_id={{item.goods_id}}" wx:for="{{newest}}" wx:key="this">
-          <view class="page-column">
-            <view class="sale_img">
-              <image mode="aspectFill" src="{{item.image[0].file_path}}"></image>
-            </view>
-            <view class="content onelist-hidden">
-              <text>{{item.goods_name}}</text>
-            </view>
-            <text class="price col-m f-30">￥{{item.spec[0].goods_price}}</text>
-          </view>
-        </navigator>
-      </scroll-view>
-    </view>
-    -->
+    </navigator> -->
 
 		<!-- 猜您喜欢 -->
-		<!-- <view class="title-hrbg" style="margin-top:10rpx">
+		<view class="title-hrbg" style="margin-top:10rpx">
       <text class="cont">
-        <text class="iconfont icon-huo col-m"></text>全部礼品
+        <text class="iconfont icon-huo col-m"></text>新品推荐
       </text>
       <view class="hr"></view>
     </view>
     <view class="category-list">
-      <navigator class="list b-f" hover-class="none" url="../goods/index?goods_id={{item.goods_id}}" wx:for="{{best}}" wx:key="this">
+      <navigator class="list b-f" hover-class="none" url="../goods/index?id={{item._id}}" wx:for="{{list.data}}" wx:key="this">
         <view class="left">
           <view class="img">
-            <image class="goodsImg" mode="scaleToFill" src="{{item.image[0].file_path}}"></image>
+            <image class="goodsImg" mode="scaleToFill" src="{{item.image[0]}}"></image>
           </view>
         </view>
         <view class="right">
           <view class="cont">
-            <text class="f-30 title twolist-hidden m-top10">{{item.goods_name}}</text>
-            <text class="price f-34 col-m f-w">￥{{item.spec[0].goods_price}}</text>
+            <text class="f-30 title twolist-hidden m-top10">{{item.name}}</text>
+            <text class="price f-34 col-m f-w">￥{{item.price}}</text>
           </view>
         </view>
       </navigator>
-    </view> -->
-
-
-		<!-- 底线 -->
-		<view class="title-footer p-r">
-			<text class="f-24 col-9 cont">我是有底线的</text>
-			<view class="hr"></view>
-		</view>
+    </view>
+    <view hidden="{{!no_more}}" class="no-more f-30">亲, 没有更多了</view>
 	</scroll-view>
 
 	<!-- 返回顶部 -->

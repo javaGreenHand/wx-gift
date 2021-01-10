@@ -4,23 +4,13 @@ const db = wx.cloud.database({
 })
 Page({
   data: {
-    searchColor: "rgba(0,0,0,0.4)",
-    searchSize: "15",
-    searchName: "搜索商品",
-
     scrollHeight: null,
-    showView: false,
-    arrange: "",
-
-    sortType: 'all', // 排序类型
-    sortPrice: false, // 价格从低到高
 
     option: {},
     list: [],
 
     noList: false,
-    no_more: true,
-
+    no_more: false,
     page: 1,
   },
 
@@ -50,6 +40,8 @@ Page({
     let limit = 10;
     if (undefined == page) {
       page = 0;
+    }else{
+      page = page - 1;
     }
 
     db.collection('goods').count().then(res => {
@@ -87,41 +79,11 @@ Page({
   },
 
   /**
-   * 切换排序方式
-   */
-  switchSortType: function (e) {
-    let _this = this,
-      newSortType = e.currentTarget.dataset.type,
-      newSortPrice = newSortType === 'price' ? !_this.data.sortPrice : true;
-
-    _this.setData({
-      list: {},
-      page: 1,
-      sortType: newSortType,
-      sortPrice: newSortPrice
-    }, function () {
-      // 获取商品列表
-      _this.getGoodsList(true);
-    });
-  },
-
-  /**
    * 跳转筛选
    */
   toSynthesize: function (t) {
     wx.navigateTo({
       url: "../category/screen?objectId="
-    });
-  },
-
-  /**
-   * 切换列表显示方式
-   */
-  onChangeShowState: function () {
-    let _this = this;
-    _this.setData({
-      showView: !_this.data.showView,
-      arrange: _this.data.arrange ? "" : "arrange"
     });
   },
 
@@ -137,17 +99,6 @@ Page({
       return false;
     }
     this.getGoodsList(false, ++this.data.page);
-  },
-
-  /**
-   * 设置分享内容
-   */
-  onShareAppMessage: function () {
-    return {
-      title: "全部分类",
-      desc: "",
-      path: "/pages/category/index"
-    };
   },
 
 });

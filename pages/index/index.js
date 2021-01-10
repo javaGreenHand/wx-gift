@@ -21,10 +21,15 @@ Page({
         btnColor : ""
       }
     },
-    newest: {},
-    best: [],
+
     navi : [],
 
+    scrollHeight: null,
+    option: {},
+    list: [],
+    noList: false,
+    no_more: false,
+    page: 1,
 
     scrollTop: 0,
   },
@@ -32,10 +37,12 @@ Page({
   onLoad: function() {
     // 设置页面标题
     App.setTitle();
-    // 设置navbar标题、颜色
-    // App.setNavigationBar();
-    // 获取首页数据，云开发
+    // 获取banner图
     this.getIndexData();
+    // 设置商品列表高度
+    this.setListHeight();
+    // 获取商品列表
+    this.getGoodsList(true);
   },
 
   /**
@@ -59,32 +66,6 @@ Page({
     })
   },
 
-  /**
-   * 计算图片高度
-   */
-  imagesHeight: function(e) {
-    let imgId = e.target.dataset.id,
-      itemKey = e.target.dataset.itemKey,
-      ratio = e.detail.width / e.detail.height, // 宽高比
-      viewHeight = 750 / ratio, // 计算的高度值
-      imgHeights = this.data.imgHeights;
-
-    // 把每一张图片的对应的高度记录到数组里
-    if (typeof imgHeights[itemKey] === 'undefined') {
-      imgHeights[itemKey] = {};
-    }
-    imgHeights[itemKey][imgId] = viewHeight;
-    // 第一种方式
-    let imgCurrent = this.data.imgCurrent;
-    if (typeof imgCurrent[itemKey] === 'undefined') {
-      imgCurrent[itemKey] = Object.keys(this.data.item.data)[0];
-    }
-    this.setData({
-      imgHeights,
-      imgCurrent
-    });
-  },
-
   bindChange: function(e) {
     let itemKey = e.target.dataset.itemKey,
       imgCurrent = this.data.imgCurrent;
@@ -101,13 +82,77 @@ Page({
     });
   },
 
-  scroll: function(t) {
-    this.setData({
-      indexSearch: t.detail.scrollTop
-    }), t.detail.scrollTop > 300 ? this.setData({
+  /**
+   * 下拉到底加载数据, 云开发
+   */
+  bindDownLoad: function (t) {
+    t.detail.scrollTop > 300 ? this.setData({
       floorstatus: !0
     }) : this.setData({
       floorstatus: !1
+    });
+
+    if (this.data.page >= this.data.list.last_page) {
+      this.setData({
+        no_more: true
+      });
+      return false;
+    }
+    this.getGoodsList(false, ++this.data.page);
+  },
+
+  /**
+   * 获取商品列表, 云开发
+   */
+  getGoodsList: function (is_super, page) {
+    let _this = this;
+    let limit = 10;
+    if (undefined == page) {
+      page = 0;
+    }else{
+      page = page - 1;
+    }
+
+    db.collection('goods').count().then(res => {
+      db.collection('goods').skip(page * limit).limit(limit).get().then(result => {
+        let resultList = result,
+          dataList = _this.data.list;
+          resultList.last_page = res.total / limit;
+        if (is_super === true || typeof dataList === 'undefined') {
+          // typeof dataList.data === 'undefined'
+          _this.setData({
+            list: resultList,
+            noList: false
+          });
+        } else {
+          _this.setData({
+            'list.data': dataList.data.concat(resultList.data)
+          });
+        }
+      })
+    })
+  },
+
+  /**
+   * 设置商品列表高度
+   */
+  setListHeight: function () {
+    let _this = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          scrollHeight: res.windowHeight,
+        });
+      }
+    });
+  },
+
+  /**
+   * 跳转筛选
+   */
+  toSynthesize: function (t) {
+    wx.navigateTo({
+      url: "../category/screen?objectId="
     });
   },
 
